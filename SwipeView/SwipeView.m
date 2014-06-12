@@ -989,14 +989,15 @@
 - (void)reloadData
 {
     //remove old views
+    self.itemViewPool = [NSMutableSet set];
     for (UIView *view in self.visibleItemViews)
     {
         [view removeFromSuperview];
+        [self queueItemView:view];
     }
     
-    //reset view pools
+    //reset item views
     self.itemViews = [NSMutableDictionary dictionary];
-    self.itemViewPool = [NSMutableSet set];
     
     //get number of items
     [self updateItemSizeAndCount];
